@@ -20,12 +20,16 @@ function keyUp(e) {
   if (num >= 10) {
     characterCountWarp.style.color = "black";
   } else {
-    characterCountWarp.style.color = "red";
+    characterCountWarp.style.color = "green";
   }
   if (num <= 0) {
-    alert("課金が必要です");
-    window.location = "https://unsplash.com/ja";
-
+    inputText.value = "";
+    let toDo = confirm("画像参照サイトに移動しますか？");
+    if (toDo === true) {
+      window.location = "https://unsplash.com/ja";
+    } else {
+      alert("いつでもお待ちしてます！");
+    }
   }
 }
 
@@ -53,7 +57,8 @@ function randomCharactor(c) {
       //跳ねさせる文字を span タグで囲む、それ以外の文字と合わせて再び文字列を作る
       let newRandomChar =
         randomCharIText.substring(0, Num) +
-        "<span>" +
+        `<span style='background-color: ${getRandomColor()};'>` +
+        // "<span style='background-color: '>" +
         randomCharIText.charAt(Num) +
         "</span>" +
         randomCharIText.substring(Num + 1, randomCharLength);
@@ -71,5 +76,12 @@ function randomCharactor(c) {
   }
 }
 
+//カラフルCSS？
+function getRandomColor() {
+  let colorList = ["red", "green", "blue", "yellow", "pink"];
+  return colorList[Math.floor(Math.random() * colorList.length)];
+}
+
 //クラス名が pyonpyon のクラスを跳ねさせる
 randomCharactor("pyonpyon");
+
